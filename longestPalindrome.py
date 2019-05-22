@@ -20,26 +20,23 @@ class Solution(object):
         rst = 1
         rst_str = s[0]
 
-        for i in range(len(s)):
-            for j in range(i, len(s)):
-                if i == j:
-                    dp[i][j] = True
-                elif j - i <= 1 and s[i] == s[j]:
-                    dp[i][j] = True
-                    rst = max(rst, 2)
-                    rst_str = s[i:j+1]
-                    # dp[j][i] = True
-                else:
-                    dp[i][j] = False
+        for i in range(len(s)-1):
+            dp[i][i] = True
+            if s[i] == s[i+1]:
+                dp[i][i+1] = True
+                rst = max(rst, 2)
+                rst_str = s[i:i + 2]
+
+        dp[len(s)-1][len(s)-1] = True
 
         for sub_len in range(3, len(s)+1):
-            for i in range(len(s)):
-                if i + sub_len - 1 < len(s):
-                    dp[i][i + sub_len - 1] = (s[i] == s[i + sub_len - 1] and dp[i + 1][i + sub_len - 2])
-                    if dp[i][i + sub_len - 1]:
-                        if rst < sub_len:
-                            rst = sub_len
-                            rst_str = s[i:i + sub_len]
+            for i in range(len(s)-sub_len+1):
+                # if i + sub_len - 1 < len(s):
+                dp[i][i + sub_len - 1] = (s[i] == s[i + sub_len - 1] and dp[i + 1][i + sub_len - 2])
+                if dp[i][i + sub_len - 1]:
+                    if rst < sub_len:
+                        rst = sub_len
+                        rst_str = s[i:i + sub_len]
                         # rst = max(rst, sub_len)
                 # if i - sub_len + 1 >= 0:
                 #     dp[i + sub_len - 1][i] = (s[i] == s[i + sub_len - 1] and dp[i + 1][i + sub_len - 2])
@@ -51,5 +48,6 @@ if __name__ == '__main__':
     # a, b, c = 99, 3, 1
     s = "abba"
     s = "cbbd"
-    s = "abcda"
+    # s = "abcda"
+    # s = "fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffgggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg"
     print(Solution().longestPalindrome(s))
