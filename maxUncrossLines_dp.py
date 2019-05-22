@@ -1,6 +1,17 @@
 #!/usr/bin/env python
 # -*- encoding: utf-8 -*-
 '''
+@File    :   maxUncrossLines_dp.py    
+@Contact :   9824373@qq.com
+@License :   (C)Copyright 2017-2018, Liugroup-NLPR-CASIA
+@Desc    :     
+@Modify Time      @Author    @Version    @Desciption
+------------      -------    --------    -----------
+2019/5/7 22:25   zhan      1.0         None
+'''
+#!/usr/bin/env python
+# -*- encoding: utf-8 -*-
+'''
 @File    :   maxUncrossedLines.py
 @Contact :   9824373@qq.com
 @License :   (C)Copyright 2017-2018, Liugroup-NLPR-CASIA
@@ -30,19 +41,16 @@ class Solution(object):
         :type B: List[int]
         :rtype: int
         """
+        rst = [[0 for j in range(len(B)+1)] for i in range(len(A)+1)]
 
-        if len(A) < len(B):
-            A, B = B, A
-        if len(B) == 1:
-            for i, ai in enumerate(A):
-                if ai == B[0]:
-                    return 1
-            return 0
+        for i in range(1,len(rst)):
+            for j in range(1,len(rst[0])):
+                if A[i-1] == B[j-1]:
+                    rst[i][j] = 1 + rst[i-1][j-1]
+                else:
+                    rst[i][j] = max(rst[i-1][j], rst[i][j-1])
 
-        if A[0] == B[0]:
-            return 1 + self.maxUncrossedLines(A[1:], B[1:])
-        else:
-            return max(self.maxUncrossedLines(A[1:], B), self.maxUncrossedLines(A, B[1:]))
+        return rst[-1][-1]
 
         # a_idx, a_idx_b, b_idx, b_idx_a = 0, 0, 0, 0
         # found = False
