@@ -3,7 +3,7 @@
 '''
 @File    :   longestPalindrome.py    
 @Contact :   9824373@qq.com
-@License :   (C)Copyright 2017-2018, Liugroup-NLPR-CASIA
+@License :   (C)Copyright 2017-2018, Zhan
 @Desc    :     
 @Modify Time      @Author    @Version    @Desciption
 ------------      -------    --------    -----------
