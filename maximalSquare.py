@@ -35,25 +35,13 @@ class Solution(object):
         for s_len in range(2, maxLen + 1):
             for i in range(0, nrow - s_len + 1):
                 for j in range(0, ncol - s_len + 1):
-                    if rstMatrix[i][j][s_len - 2] == True:
-                        tmpFlag = True
-                        for jIdx in range(j,j+s_len):
-                            if matrix[i+s_len-1][jIdx] == '0':
-                                tmpFlag = False;
-                                break
-
-                        if tmpFlag:
-                            for iIdx in range(i, i + s_len):
-                                if matrix[iIdx][j+s_len-1] == '0':
-                                    tmpFlag = False;
-                                    break
-
-                        rstMatrix[i][j][s_len - 1] = tmpFlag
-                        if tmpFlag:
-                            rst = [i, j, s_len]
-
+                    if rstMatrix[i][j][s_len - 2] and rstMatrix[i+1][j][s_len - 2] \
+                            and rstMatrix[i][j+1][s_len - 2] and rstMatrix[i+1][j+1][s_len - 2]:
+                        rstMatrix[i][j][s_len - 1] = True
+                        rst = [i, j, s_len]
                     else:
                         rstMatrix[i][j][s_len - 1] = False
+
 
         return rst[2]*rst[2]
 
