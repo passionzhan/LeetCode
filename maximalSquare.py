@@ -20,6 +20,7 @@ class Solution(object):
         if ncol <= 0:
             return 0
 
+
         maxLen = min(nrow,ncol)
 
         rstMatrix = [[list(range(0,maxLen)) for item in row] for row in matrix]
