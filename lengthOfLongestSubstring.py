@@ -35,30 +35,25 @@ class Solution:
         if len(s) == 0:
             return 0
 
-        idx = 0
-        curStr = ""
+        bIdx, eIdx, ans = 0, 0, 0
         curDict = {}
-        ans = 0
-        while idx < len(s):
-            if s[idx] not in curDict:
-                curDict.setdefault(s[idx], len(curDict))
-                curStr += s[idx]
-                curLen = len(curStr)
+        while eIdx < len(s):
+            if s[eIdx] not in curDict:
+                curDict[s[eIdx]] = eIdx
             else:
-                if curDict[s[idx]] == len(curStr) - 1:
-                    curStr = s[idx]
-                else:
-                    curStr = curStr[curDict[s[idx]]+1:] + s[idx]
-                curDict = {char: i for i, char in enumerate(curStr)}
-                curLen = len(curStr)
-            ans = max(curLen, ans)
-            idx += 1
+                bIdx_tmp = curDict[s[eIdx]]+1
+                for char in s[bIdx:curDict[s[eIdx]]+1]:
+                    curDict.pop(char)
+                bIdx = bIdx_tmp
+                curDict[s[eIdx]] = eIdx
+            ans = max(len(curDict), ans)
+            eIdx += 1
         return ans
 
 
 if __name__ == '__main__':
     a = "abcabcbb"
-    a = "pwwkew"
-    a = "因为无重复字为符"
+    # a = "pwwkew"
+    a = "因为DFDAF无重DF复DF字F为符"
     ans = Solution().lengthOfLongestSubstring(a)
     print(ans)
