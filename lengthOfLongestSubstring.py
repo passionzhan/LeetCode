@@ -41,10 +41,9 @@ class Solution:
             if s[eIdx] not in curDict:
                 curDict[s[eIdx]] = eIdx
             else:
-                bIdx_tmp = curDict[s[eIdx]]+1
-                for char in s[bIdx:curDict[s[eIdx]]+1]:
+                for char in s[bIdx:curDict[s[eIdx]]]:
                     curDict.pop(char)
-                bIdx = bIdx_tmp
+                bIdx = curDict[s[eIdx]] + 1
                 curDict[s[eIdx]] = eIdx
             ans = max(len(curDict), ans)
             eIdx += 1
