@@ -55,8 +55,8 @@ class Solution:
 
 if __name__ == '__main__':
     S = "aab"
-    S = "aaab"
-    S = 'aaabc'
+    # S = "aaab"
+    # S = 'aaabc'
     # SS = { char:1  for char in S}
 
     ans = Solution().reorganizeString(S)
